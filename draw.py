@@ -1,7 +1,21 @@
 from display import *
 
 def draw_line(screen, x0, y0, x1, y1, color):
-    slope = (y1 - y0) / (x1 - x0)
+    if x0 > x1:
+        tempx = x0
+        tempy = y0
+        x0 = x1
+        y0 = y1
+        x1 = tempx
+        y1 = tempy
+    try:
+        slope = (y1 - y0) / (x1 - x0)
+    except:
+        if y1 > y0:
+            octant_2(screen, x0, y0, x1, y1, color)
+        else:
+            octant_7(screen, x0, y0, x1, y1, color)
+        return
     if 0 <= slope <= 1:
         octant_1(screen, x0, y0, x1, y1, color)
     elif slope > 1:
